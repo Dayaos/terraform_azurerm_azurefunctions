@@ -3,3 +3,20 @@ on:
       branches: ["main"]
   pull_request:
       branches: ["main"]
+
+jobs:
+  terraform:
+    env:
+      ARM_CLIENT_ID: ${{ secrets.CLIENT_ID }}
+      ARM_CLIENT_SECRET: ${{ secrets.CLIENT_SECRET }}
+      ARM_SUBSCRIPTION_ID: ${{ secrets.SUBSCRIPTION_ID }}
+      ARM_TENANT_ID: ${{ secrets.TENANT_ID }}
+    name: 'Terraform'
+    runs-on: ubuntu-lastest
+    defaults:
+      run:
+        working-directory: ${{ github.workspace }}/storageAbac
+    steps:
+    - uses: actions/checkout@v2
+    - uses: hashicorp/setup-terraform@v1
+        
